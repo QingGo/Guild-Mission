@@ -1,17 +1,20 @@
 const express = require('express');
 const router = express.Router();
 
-const User = require('../model/user')
+const User = require('../models/user')
 
 //利用中间件方法对统一返回格式进行配置，每次路由进入对返回格式做初始化处理
 var responseData
 router.use((req,res,next) => {
-    console.log(req)
+    // console.log(req)
     responseData = {
         code: 0, //默认0，代表无任何错误
         message: ''  //错误信息
     }
     next()
+})
+router.get('/', (req, res) => {
+    res.json(responseData)
 })
 
 router.post('/user/register', (req, res) => {
